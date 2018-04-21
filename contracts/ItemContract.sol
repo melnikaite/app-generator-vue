@@ -20,8 +20,8 @@ contract ItemContract {
 
   }
 
-  mapping(bytes32 => Item)  itemMap;
-  bytes32[]   itemArray;
+  mapping(bytes32 => Item) public itemMap;
+  bytes32[] public itemArray;
 
   function ItemContract() public {
     contractOwner = msg.sender;
