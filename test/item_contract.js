@@ -45,7 +45,7 @@ contract('ItemContract', function(accounts) {
     assert.isOk(result,"item0.1 should be changed now");
     results = await itemContract.readItem.call("item0.1");
     assert.equal (results[2], "Item 0.1 has been changed", "Item 0.1 has been changed");
-    assert.equal (web3.toAscii(results[3]), "Paris","location should be paris");
+    assert.equal (web3.toUtf8(results[3]), "Paris","location should be paris");
     
 
     //check count
