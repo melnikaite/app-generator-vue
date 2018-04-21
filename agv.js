@@ -12,7 +12,7 @@ let resultString = createFromTemplate.createContract(fileInitialString, targetEn
 
 const createdContractFilePath = 'contracts/' + targetEntityName + 'Contract.sol';
 
-fs.appendFileSync(createdContractFilePath, resultString);
+// fs.appendFileSync(createdContractFilePath, resultString);
 // console.log(resultString);
 
-console.log("Generated contract: " + createdContractFilePath);
+// console.log("Generated contract: " + createdContractFilePath);
