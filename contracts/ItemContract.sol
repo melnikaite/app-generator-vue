@@ -45,6 +45,9 @@ contract ItemContract {
     //generated fields
     itemMap[id].name = name; 
     itemMap[id].location = location;
+    ItemCreated(id, 
+        //generated fields - only param 1??? 
+        name);
     return true;
   }
 
@@ -81,6 +84,9 @@ contract ItemContract {
     //generated fields
     itemMap[id].name = name;
     itemMap[id].location = location;
+    ItemUpdated(id, 
+        //generated fields - only param 1??? 
+        name);
     return true;
   }
   
@@ -96,8 +102,11 @@ contract ItemContract {
     itemMap[lastItem].index = i;
     itemArray[i] = lastItem;
     itemArray.length--;
-   
+    var name = itemMap[lastItem].name;
     delete(itemMap[id]);
+    ItemDeleted(id, 
+        //generated fields - only param 1??? 
+        name);
     return true;
   }
 
@@ -107,8 +116,14 @@ contract ItemContract {
   }
 
 
-  event ItemCreated(address indexed _address, bytes32 _item);
-  event ItemUpdated(address indexed _address, uint _id);
-  event ItemDeleted(address indexed _address, uint _id);
+  event ItemCreated(bytes32 indexed _id,
+        //generated fields - only param 1??? 
+        string indexed _name);
+  event ItemUpdated(bytes32 indexed _id,
+        //generated fields - only param 1??? 
+        string indexed _name);
+  event ItemDeleted(bytes32 indexed _id,
+        //generated fields - only param 1??? 
+        string indexed _name);
 
 }

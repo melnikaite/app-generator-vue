@@ -84,6 +84,14 @@ contract('ItemContract', function(accounts) {
   });
 });
 
+
+// Truffle: you may access the log in receipt
+function  dumpEvents(result){
+  for(var i=0; i<result.logs.length;i++){
+        console.log(result.logs[i].event,'>>', result.logs[i].args.name,' ',result.logs[i].args.howmuch.toNumber())
+  }
+}
+
 // async function  printNames(addressRegistry, count){
 //     // var ctr = 0;
 //     for(i=0; i < count; i++){
