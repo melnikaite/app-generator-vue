@@ -1,5 +1,5 @@
-var Users = artifacts.require("./Users.sol");
+var EventParticipant = artifacts.require("./EventParticipant.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(Users);
+  deployer.deploy(EventParticipant);
 };
