@@ -11,9 +11,8 @@ contract ItemContract {
     address   owner;
     uint      lastUpdated;
     bool initialized;
-    //generated fields  
-    string   name;
-    bytes32 location;
+    //generated fields
+    _typeValueSemicolonSeparated_
     // uint lengthInHours;
     // uint price;
     // bytes3 currencyTicker;
@@ -30,7 +29,7 @@ contract ItemContract {
   // Creates Item
   function createItem(bytes32 id,
         //generated fields
-        string name, bytes32 location)
+        _typeValueCommaSeparated_)
         public returns (bool) {
 
     //item already exists
@@ -43,24 +42,23 @@ contract ItemContract {
     itemMap[id].owner = msg.sender;
     itemMap[id].lastUpdated = now;
     //generated fields
-    itemMap[id].name = name;
-    itemMap[id].location = location;
+    _itemMapIdValueEqualValueSemicolonSeparated_
     ItemCreated(id,
         //generated fields - only param 1???
-        name);
+        _valueCommaSeparated_);
     return true;
   }
 
-  // Returns an Item by name
+  // Returns an Item by id
   function  readItem(bytes32 id) constant public returns (address,uint,
       //generated fields
       string, bytes32) {
     return (itemMap[id].owner, itemMap[id].lastUpdated,
       //generated fields
-            itemMap[id].name, itemMap[id].location);
+            _itemMapIdValueCommaSeparated_);
   }
 
-  // Returns an Item by name
+  // Returns an Item by index
   function  readItemByIndex(uint index) constant public returns (address,uint,
       //generated fields
         string, bytes32) {
@@ -68,13 +66,12 @@ contract ItemContract {
     bytes32 id = itemArray[index];
     return (itemMap[id].owner, itemMap[id].lastUpdated,
       //generated fields
-            itemMap[id].name, itemMap[id].location);
+            _itemMapIdValueCommaSeparated_);
   }
  // Updates Item
   function updateItem(bytes32 id,
         //generated fields
-        string name,
-        bytes32 location)
+        _typeValueCommaSeparated_)
         public  returns (bool) {
     //item should exist
     require (itemMap[id].owner != address(0));
@@ -82,17 +79,15 @@ contract ItemContract {
 
     itemMap[id].lastUpdated = now;
     //generated fields
-    itemMap[id].name = name;
-    itemMap[id].location = location;
+    _itemMapIdValueEqualValueSemicolonSeparated_
     ItemUpdated(id,
         //generated fields - only param 1???
-        name);
+        _valueCommaSeparated_);
     return true;
   }
 
   // Deletes Item
   function deleteItem  (bytes32 id) public  returns (bool) {
-    // if(bytes(itemMap[id].name).length != 0) return false; //TODO  get rid of names as generated field
     //item should  exist
     require (itemMap[id].owner != address(0));
     require (itemMap[id].owner == msg.sender || contractOwner == msg.sender); //only item owner or contract owner can update
@@ -102,11 +97,11 @@ contract ItemContract {
     itemMap[lastItem].index = i;
     itemArray[i] = lastItem;
     itemArray.length--;
-    var name = itemMap[lastItem].name;
+
 
     ItemDeleted(id,
         //generated fields - only param 1???
-        name);
+        _itemMapIdValueCommaSeparated_ );
     delete(itemMap[id]);
     return true;
   }
@@ -118,13 +113,10 @@ contract ItemContract {
 
 
   event ItemCreated(bytes32 indexed _id,
-        //generated fields - only param 1???
-        string  _name);
+        _typeValueCommaSeparated_);
   event ItemUpdated(bytes32 indexed _id,
-        //generated fields - only param 1???
-        string  _name);
+        _typeValueCommaSeparated_);
   event ItemDeleted(bytes32 indexed _id,
-        //generated fields - only param 1???
-        string  _name);
+        _typeValueCommaSeparated_);
 
 }
