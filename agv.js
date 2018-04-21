@@ -1,22 +1,18 @@
 #!/usr/bin/env node
 var argv = require('minimist')(process.argv.slice(2));
 const fs = require('fs');
+var createFromTemplate = require('./createFromTemplate.js');
 
-console.dir(argv);
+const targetEntityName = argv.model;
+const targetEntityFields = argv.fields;
 
-convert = (fileInitialString, targetEntity) => {
-  let result = fileInitialString.replace(/Item/g, targetEntity).replace(/item/g, targetEntity.toLowerCase());
-  return result;
-}
+let fileInitialString = fs.readFileSync('contracts/TemplateContract.sol', 'utf8');
 
-const targetEntity = argv.create;
+let resultString = createFromTemplate.createContract(fileInitialString, targetEntityName, targetEntityFields);
 
-let fileInitialString = fs.readFileSync('contracts/ItemContract.sol', 'utf8');
+const createdContractFilePath = 'contracts/' + targetEntityName + 'Contract.sol';
 
-let resultString = convert(fileInitialString, targetEntity);
+fs.appendFileSync(createdContractFilePath, resultString);
+// console.log(resultString);
 
-fs.appendFileSync('contracts/' + targetEntity + 'Contract.sol', resultString);
-
-// console.log("RESULT: " + resultString);
-
-// var camelCased = myString.replace(/-([a-z])/g, function (g) { return g[1].toUpperCase(); });
+console.log("Generated contract: " + createdContractFilePath);
