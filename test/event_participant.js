@@ -11,6 +11,11 @@ contract('EventParticipant', function(accounts) {
     assert.isOk(result, "Event 0.2 should be created successfully");
     result = await eventParticipant.createEvent ("event1.1", "Event 1.1",{from:accounts[1]});
     assert.isOk(result, "Event 1.1 should be created successfully");
+
+
+
+
+
     // result = await eventParticipant.createEvent ("event1.1", "Event 1.1",{from:accounts[1]});
     // assert.isNotOk(result, "Repeat Event 1.1 should fail");
     var results = await eventParticipant.readEvent.call("event0.1");

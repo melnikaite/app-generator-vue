@@ -103,10 +103,11 @@ contract ItemContract {
     itemArray[i] = lastItem;
     itemArray.length--;
     var name = itemMap[lastItem].name;
-    delete(itemMap[id]);
+  
     ItemDeleted(id, 
         //generated fields - only param 1??? 
         name);
+    delete(itemMap[id]);
     return true;
   }
 
@@ -118,12 +119,12 @@ contract ItemContract {
 
   event ItemCreated(bytes32 indexed _id,
         //generated fields - only param 1??? 
-        string indexed _name);
+        string  _name);
   event ItemUpdated(bytes32 indexed _id,
         //generated fields - only param 1??? 
-        string indexed _name);
+        string  _name);
   event ItemDeleted(bytes32 indexed _id,
         //generated fields - only param 1??? 
-        string indexed _name);
+        string  _name);
 
 }

@@ -11,6 +11,13 @@ contract('ItemContract', function(accounts) {
     assert.isOk(result, "Item 0.2 should be created successfully");
     result = await itemContract.createItem ("item1.1", "Item 1.1","New York",{from:accounts[1]});
     assert.isOk(result, "Item 1.1 should be created successfully");
+
+    //  result=tx reciept that has the log/events
+    // dumpEvents(result);
+    assert.equal('ItemCreated',result.logs[0].event);
+    console.log("event =", result.logs[0].event);
+
+
     try {
       revertFound = false;
       result = await itemContract.createItem ("item1.1", "Item 1.1","Paris",{from:accounts[1]});
@@ -46,6 +53,10 @@ contract('ItemContract', function(accounts) {
     results = await itemContract.readItem.call("item0.1");
     assert.equal (results[2], "Item 0.1 has been changed", "Item 0.1 has been changed");
     assert.equal (web3.toUtf8(results[3]), "Paris","location should be paris");
+
+    assert.equal('ItemUpdated',result.logs[0].event);
+    console.log("event =", result.logs[0].event);
+
     
 
     //check count
@@ -77,8 +88,15 @@ contract('ItemContract', function(accounts) {
     //valid delete by contract owner
     result = await itemContract.deleteItem("item1.1",{from:accounts[0]});
     assert.isOk(result,"item1.1 should get deleted by contract owner");
+
+    assert.equal('ItemDeleted',result.logs[0].event);
+    console.log("event =", result.logs[0].event);
+
+
     result = await itemContract.countItem.call();
     assert.equal(result, 1, "There should be 1 item");
+
+
     
 
   });
