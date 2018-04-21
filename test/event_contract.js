@@ -114,7 +114,7 @@ function  dumpEvents(result){
 //     // var ctr = 0;
 //     for(i=0; i < count; i++){
 //         result = await addressRegistry.getByIndex.call(i);
-//           var name = web3.toAscii(result[1]);
+//           var name = web3.toUtf8(result[1]);
 //           name = name.replace(/\0/g, '');
 //           console.log(result[0],'----',name,'---', new Date(result[2].toNumber()*1000));
         

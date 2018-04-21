@@ -66,13 +66,13 @@ const Item = {
         {from: self.$web3.eth.accounts[0], gas: gas}
       ).then(result => {
         const item = {
-          id: self.$web3.toAscii(id),
+          id: self.$web3.toUtf8(id),
           index: result[0],
           owner: result[1],
           updated: result[2],
           initialized: result[3],
           name: result[4],
-          location: self.$web3.toAscii(result[5]),
+          location: self.$web3.toUtf8(result[5]),
         };
         resolve(item)
       }).catch(err => {
