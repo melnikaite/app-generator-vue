@@ -51,7 +51,7 @@ contract ItemContract {
     return true;
   }
 
-  // Returns an Item by name
+  // Returns an Item by id
   function  readItem(bytes32 id) constant public returns (address,uint,
       //generated fields
       string, bytes32) {
@@ -60,7 +60,7 @@ contract ItemContract {
             itemMap[id].name, itemMap[id].location);
   }
 
-  // Returns an Item by name
+  // Returns an Item by index
   function  readItemByIndex(uint index) constant public returns (address,uint,
       //generated fields
         string, bytes32) {
@@ -102,11 +102,10 @@ contract ItemContract {
     itemMap[lastItem].index = i;
     itemArray[i] = lastItem;
     itemArray.length--;
-    var name = itemMap[lastItem].name;
   
     ItemDeleted(id, 
         //generated fields - only param 1??? 
-        name);
+        itemMap[id].name);
     delete(itemMap[id]);
     return true;
   }
