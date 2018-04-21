@@ -65,7 +65,16 @@ const Item = {
         id,
         {from: self.$web3.eth.accounts[0], gas: gas}
       ).then(result => {
-        resolve(result)
+        const item = {
+          id: self.$web3.toAscii(id),
+          index: result[0],
+          owner: result[1],
+          updated: result[2],
+          initialized: result[3],
+          name: result[4],
+          location: self.$web3.toAscii(result[5]),
+        };
+        resolve(item)
       }).catch(err => {
         reject(err)
       })
@@ -95,7 +104,7 @@ const Item = {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.createItem(
+      self.instance.updateItem(
         id,
         name,
         location,
