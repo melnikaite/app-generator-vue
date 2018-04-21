@@ -1,7 +1,7 @@
 import contract from 'truffle-contract'
-import UsersContract from '@contracts/Users.json'
+import EventParticipantContract from '@contracts/EventParticipant.json'
 
-const Users = {
+const EventParticipant = {
 
   contract: null,
 
@@ -11,7 +11,7 @@ const Users = {
     let self = this
 
     return new Promise(function (resolve, reject) {
-      self.contract = contract(UsersContract)
+      self.contract = contract(EventParticipantContract)
       self.contract.setProvider(window.web3.currentProvider)
 
       self.contract.deployed().then(instance => {
@@ -23,41 +23,42 @@ const Users = {
     })
   },
 
-  exists: function (address) {
+  readEventByIndex: function (index) {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.exists.call(
-        address || window.web3.eth.defaultAccount,
+      self.instance.readEventByIndex.call(
+        index,
         {from: window.web3.eth.accounts[0]}
-      ).then(exists => {
-        resolve(exists)
+      ).then(result => {
+        resolve(result)
       }).catch(err => {
         reject(err)
       })
     })
   },
 
-  authenticate: function () {
+  countEvent: function () {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.authenticate.call(
+      self.instance.countEvent.call(
         {from: window.web3.eth.accounts[0]}
-      ).then(pseudo => {
-        resolve(window.web3.toUtf8(pseudo))
+      ).then(result => {
+        resolve(result)
       }).catch(err => {
         reject(err)
       })
     })
   },
 
-  create: function (pseudo) {
+  createEvent: function (id, name) {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.create(
-        pseudo,
+      self.instance.createEvent(
+        id,
+        name,
         {from: window.web3.eth.accounts[0]}
       ).then(tx => {
         resolve(tx)
@@ -67,11 +68,28 @@ const Users = {
     })
   },
 
-  destroy: function () {
+  updateEvent: function (id, name) {
     let self = this
 
     return new Promise((resolve, reject) => {
-      self.instance.destroy(
+      self.instance.createEvent(
+        id,
+        name,
+        {from: window.web3.eth.accounts[0]}
+      ).then(tx => {
+        resolve(tx)
+      }).catch(err => {
+        reject(err)
+      })
+    })
+  },
+
+  deleteEvent: function (id) {
+    let self = this
+
+    return new Promise((resolve, reject) => {
+      self.instance.deleteEvent(
+        id,
         {from: window.web3.eth.accounts[0]}
       ).then(tx => {
         resolve(tx)
@@ -82,4 +100,4 @@ const Users = {
   }
 }
 
-export default Users
+export default EventParticipant
