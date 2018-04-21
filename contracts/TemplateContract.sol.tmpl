@@ -52,7 +52,7 @@ contract ItemContract {
   // Returns an Item by id
   function  readItem(bytes32 id) constant public returns (address,uint,
       //generated fields
-      string, bytes32) {
+      _typeCommaSeparated_) {
     return (itemMap[id].owner, itemMap[id].lastUpdated,
       //generated fields
             _itemMapIdValueCommaSeparated_);
@@ -61,7 +61,7 @@ contract ItemContract {
   // Returns an Item by index
   function  readItemByIndex(uint index) constant public returns (address,uint,
       //generated fields
-        string, bytes32) {
+        _typeCommaSeparated_) {
     require(index < itemArray.length);
     bytes32 id = itemArray[index];
     return (itemMap[id].owner, itemMap[id].lastUpdated,

@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 var argv = require('minimist')(process.argv.slice(2));
+
 const fs = require('fs');
+
+// node agv.js --model Book --fields '[{"name":"string"},{"location":"bytes32"}]'
 var createFromTemplate = require('./createFromTemplate.js');
 
 const targetEntityName = argv.model;
