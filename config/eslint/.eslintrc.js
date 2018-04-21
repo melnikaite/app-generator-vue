@@ -20,6 +20,8 @@ module.exports = {
     semi: 0,
     'comma-dangle': 0,
     'spaced-comment': 0,
+    'no-undef': 0,
+    'no-unneeded-ternary': 0,
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
