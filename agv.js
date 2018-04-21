@@ -6,7 +6,7 @@ var createFromTemplate = require('./createFromTemplate.js');
 const targetEntityName = argv.model;
 const targetEntityFields = argv.fields;
 
-let fileInitialString = fs.readFileSync('contracts/TemplateContract.sol', 'utf8');
+let fileInitialString = fs.readFileSync('contracts/TemplateContract.sol.tmpl', 'utf8');
 
 let resultString = createFromTemplate.createContract(fileInitialString, targetEntityName, targetEntityFields);
 
