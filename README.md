@@ -34,8 +34,14 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
     // Serves the front-end on http://localhost:8080
     npm run dev
     ```
+## 🚀 Generate Scaffold
 
-## Addresses for donation
+```
+node agv.js --model Event --fields '[{"name":"string"},{"location":"bytes32"}]'
+```
+
+
+## 💸 ETH Addresses for Donation
 
 0x63CE9f57E2e4B41d3451DEc20dDB89143fD755bB
 
