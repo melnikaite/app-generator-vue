@@ -1,5 +1,7 @@
 <template>
   <section id='item'>
+    <h1>Items Registry</h1>
+
     <b-table striped hover :items="itemArray" :fields="fields" v-show="countItem > 0">
       <template slot="id" slot-scope="data">
         {{itemMap[data.item].id}}
@@ -34,6 +36,10 @@
         <b-button @click="deleteItem(data.item)">Delete</b-button>
       </template>
     </b-table>
+
+    <p v-show="countItem < 1">No Items</p>
+
+    <h3 class="mt-5">Create new Item</h3>
 
     <b-form @submit="createItem" @reset="cancelCreating">
       <b-form-group horizontal id="idGroup" label="ID" label-for="id">
