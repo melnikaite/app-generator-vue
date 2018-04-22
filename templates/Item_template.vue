@@ -1,8 +1,8 @@
 <template>
   <section id='entityname'>
-    <h4>Entitynames Registry</h4>
+    <h1>Entitynames Registry</h1>
 
-    <b-table hover :items="entitynameArray" :fields="fields" v-show="countEntityname > 0">
+    <b-table striped hover :items="entitynameArray" :fields="fields" v-show="countEntityname > 0">
       <template slot="id" slot-scope="data">
         {{entitynameMap[data.item].id}}
       </template>
@@ -21,9 +21,9 @@ _tableFieldTemplate_
       </template>
     </b-table>
 
-    <p class="lead" v-show="countEntityname < 1">No Entitynames, you may create one</p>
+    <p v-show="countEntityname < 1">No Entitynames</p>
 
-    <h3>Create new Entityname</h3>
+    <h3 class="mt-5">Create new Entityname</h3>
 
     <b-form @submit="createEntityname" @reset="cancelCreating">
       <b-form-group horizontal id="idGroup" label="ID" label-for="id">
@@ -31,8 +31,8 @@ _tableFieldTemplate_
       </b-form-group>
 _createFormGroup_
 
-      <b-button type="submit" variant="primary" size="lg">Submit</b-button>
-      <b-button type="reset" variant="danger" size="lg">Reset</b-button>
+      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
   </section>
 </template>
