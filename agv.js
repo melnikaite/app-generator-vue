@@ -19,17 +19,29 @@ const generators = [
     name: 'itemJs',
     templatePath: 'src/js/item.js.tmpl',
     resultFilePath: 'src/js/' + targetEntityName.toLowerCase() + '.js'
+  },
+  {
+    name: 'test',
+    templatePath: 'test/test_template.js',
+    resultFilePath: 'test/' + targetEntityName.toLowerCase() + '.js'
   }
 ];
-
+let fileInitialString;
+let resultString;
 generators.forEach(generator => {
   switch (generator.name) {
     case 'contract':
-      let fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
-      let resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
-      fs.appendFileSync(generator.resultFilePath, resultString);
+      fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
+      resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+      fs.writeFileSync(generator.resultFilePath, resultString);
       console.log("✅ Generated contract: " + generator.resultFilePath);
       break;
+    case 'test':
+      fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
+      resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+     fs.writeFileSync(generator.resultFilePath, resultString);
+     console.log("✅ Generated test: " + generator.resultFilePath);
+     break;
     case 'itemJs':
       console.log('🙏 Help wanted! ' + generator.resultFilePath + ' needs to be generated... ');
       break;

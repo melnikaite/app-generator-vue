@@ -4,7 +4,7 @@ pragma solidity ^0.4.4;
 contract ItemContract {
 
   address   contractOwner;
-
+//sssss
   struct Item {
     //internal fields
     uint      index;
