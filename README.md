@@ -29,12 +29,17 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
     migrate
     ```
 
-6. Run the development server (outside the development console) for front-end hot reloading. Smart contract changes must be manually recompiled and migrated.
+6. Run tests
+    ```
+    truffle test ./test/team.js
+    ```
+
+7. Run the development server (outside the development console) for front-end hot reloading. Smart contract changes must be manually recompiled and migrated.
     ```
     npm run dev
     ```
 
-7. Open entity page
+8. Open entity page
     ```
     http://localhost:8080/?#/teams
     ```
