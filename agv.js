@@ -5,6 +5,7 @@ const fs = require('fs');
 
 // node agv.js --model Book --fields '[{"name":"string"},{"location":"bytes32"}]'
 var generatorContract = require('./generatorContract.js');
+var generatorGeneric = require ('./generatorGeneric');
 
 const targetEntityName = argv.model;
 const targetEntityFields = argv.fields;
@@ -43,13 +44,13 @@ generators.forEach(generator => {
       break;
     case 'test':
       fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
-      resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+      resultString = generatorGeneric.createContract(fileInitialString, targetEntityName, targetEntityFields);
      fs.writeFileSync(generator.resultFilePath, resultString);
      console.log("✅ Generated test: " + generator.resultFilePath);
      break;
     case 'migration':
      fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
-     resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+     resultString = generatorGeneric.createContract(fileInitialString, targetEntityName, targetEntityFields);
     fs.writeFileSync(generator.resultFilePath, resultString);
     console.log("✅ Generated migration: " + generator.resultFilePath);
     break;
