@@ -1,31 +1,39 @@
 <template>
   <section id='item'>
-    <ul>
-      <li v-for="id in itemArray">
-        <div>
-          <p>id: {{itemMap[id].id}}</p>
-          <p>index: {{itemMap[id].index}}</p>
-          <p>owner: {{itemMap[id].owner}}</p>
-          <p>updated: {{itemMap[id].updated}}</p>
-          <p>initialized: {{itemMap[id].initialized}}</p>
-        </div>
+    <b-table striped hover :items="itemArray" :fields="fields" v-show="countItem > 0">
+      <template slot="id" slot-scope="data">
+        {{itemMap[data.item].id}}
+      </template>
 
-        <div v-show="editing === id">
-          <p><label>Name <input v-model="updateForm.name"></label></p>
-          <p><label>Location <input v-model="updateForm.location"></label></p>
-          <button @click="updateItem()">Update</button>
-          <button @click="cancel(id)">Cancel</button>
+      <template slot="name" slot-scope="data">
+        <div v-show="editing === data.item">
+          <b-form-input v-model="updateForm.name" required :ref="'item-name-' + data.item"></b-form-input>
         </div>
-
-        <div v-show="editing !== id">
-          <p>name: {{itemMap[id].name}}</p>
-          <p>location: {{itemMap[id].location}}</p>
-          <button @click="editItem(id)">Edit</button>
+        <div v-show="editing !== data.item">
+          {{itemMap[data.item].name}}
         </div>
+      </template>
 
-        <button @click="deleteItem(id)">Delete</button>
-      </li>
-    </ul>
+      <template slot="location" slot-scope="data">
+        <div v-show="editing === data.item">
+          <b-form-input v-model="updateForm.location" required :ref="'item-location-' + data.item"></b-form-input>
+        </div>
+        <div v-show="editing !== data.item">
+          {{itemMap[data.item].location}}
+        </div>
+      </template>
+
+      <template slot="actions" slot-scope="data">
+        <span v-show="editing === data.item">
+          <b-button @click="updateItem(data.item)">Update</b-button>
+          <b-button @click="cancelEditing()">Cancel</b-button>
+        </span>
+        <span v-show="editing !== data.item">
+          <b-button @click="editItem(data.item)">Edit</b-button>
+        </span>
+        <b-button @click="deleteItem(data.item)">Delete</b-button>
+      </template>
+    </b-table>
 
     <b-form @submit="createItem" @reset="cancelCreating">
       <b-form-group horizontal id="idGroup" label="ID" label-for="id">
@@ -49,8 +57,9 @@
 
   export default {
     name: 'items',
-    data () {
+    data() {
       return {
+        fields: ['id', 'name', 'location', 'actions'],
         itemArray: [],
         itemMap: {},
         countItem: 0,
@@ -112,19 +121,19 @@
         this.editing = id;
       },
 
-      cancel: function (id) {
+      cancelEditing: function () {
         this.editing = undefined;
       },
 
-      cancelCreating: function (id) {
+      cancelCreating: function () {
         this.createForm = Object.assign({}, this.initialForm);
       },
 
-      updateItem: function () {
-        if (typeof this.updateForm.id !== 'undefined' && this.updateForm.id !== '' &&
-          typeof this.updateForm.name !== 'undefined' && this.updateForm.name !== '' &&
-          typeof this.updateForm.location !== 'undefined' && this.updateForm.location !== ''
-        ) {
+      updateItem: function (id) {
+        ['name', 'location'].forEach((field) => this.$refs['item-' + field + '-' + id].$el.reportValidity());
+        if (!['name', 'location'].map(
+          (field) => this.$refs['item-' + field + '-' + id].$el.checkValidity()
+        ).includes(false)) {
           Item.updateItem(this.updateForm.id, this.updateForm.name, this.updateForm.location).then(tx => {
             console.log(tx);
             this._reload();
@@ -137,12 +146,14 @@
       },
 
       deleteItem: function (id) {
-        Item.deleteItem(id).then(tx => {
-          console.log(tx);
-          this._reload();
-        }).catch(err => {
-          console.log(err)
-        })
+        if (confirm('Are you sure?')) {
+          Item.deleteItem(id).then(tx => {
+            console.log(tx);
+            this._reload();
+          }).catch(err => {
+            console.log(err)
+          })
+        }
       },
     }
   }
