@@ -45,8 +45,20 @@ ready-to-use front end Vue app with CRUD functionality.
 
 8. Open entity page
     ```
-    http://localhost:8080/?#/teams
+    http://localhost:8080/#/teams
     ```
+
+### Demo
+
+https://app-generator-vue.s3.eu-central-1.amazonaws.com/index.html#/teams
+
+### Deploy
+
+`npm run build`
+
+#### S3
+
+`aws s3 sync dist s3://app-generator-vue --acl public-read`
 
 ## 💸 ETH Addresses for Donation
 
