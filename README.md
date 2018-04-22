@@ -4,6 +4,10 @@ This box can help to scaffold a new contract development.
 It generates a ledger(register) contract with customizable fields, unit tests and 
 ready-to-use front end Vue app with CRUD functionality.
 
+## Demo 
+![Demo](https://www.dropbox.com/s/heg0fpvvcqxboon/out.gif?dl=0&raw=1 "Logo Title Text 1")
+
+
 ## Installation
 
 1. Install Truffle globally.
