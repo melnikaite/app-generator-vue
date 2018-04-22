@@ -8,7 +8,7 @@
     "Migrate contracts": "truffle migrate",
     "Run dev server for front-end hot reloading": "npm run start",
     "Build for production": "npm run build",
-    "Generate entities": ""
+    "Generate entities": "node agv.js --model Event --fields '[{\"name\":\"string\"},{\"location\":\"bytes32\"}]'"
   },
   "hooks": {
     "post-unpack": "npm install"
