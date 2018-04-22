@@ -17,11 +17,6 @@ const generators = [
     resultFilePath: 'contracts/' + targetEntityName + 'Contract.sol'
   },
   {
-    name: 'itemJs',
-    templatePath: 'src/js/item.js.tmpl',
-    resultFilePath: 'src/js/' + targetEntityName.toLowerCase() + '.js'
-  },
-  {
     name: 'test',
     templatePath: 'templates/test_template.js',
     resultFilePath: 'test/' + targetEntityName.toLowerCase() + '.js'
@@ -30,7 +25,22 @@ const generators = [
     name: 'migration',
     templatePath: 'templates/2_deploy_contracts_template.js',
     resultFilePath: 'migrations/' + '2_deploy_contracts.js'
-  }
+  },
+  {
+    name: 'router',
+    templatePath: 'templates/index_template.js',
+    resultFilePath: 'src/router/index.js'
+  },
+  {
+    name: 'js',
+    templatePath: 'templates/item_template.js',
+    resultFilePath: 'src/js/' + targetEntityName.toLowerCase() + '.js'
+  },
+  {
+    name: 'vue',
+    templatePath: 'templates/Item_template.vue',
+    resultFilePath: 'src/components/' + targetEntityName + '.vue'
+  },
 ];
 let fileInitialString;
 let resultString;
@@ -54,8 +64,23 @@ generators.forEach(generator => {
     fs.writeFileSync(generator.resultFilePath, resultString);
     console.log("✅ Generated migration: " + generator.resultFilePath);
     break;
-    case 'itemJs':
-      console.log('🙏 Help wanted! ' + generator.resultFilePath + ' needs to be generated... ');
+    case 'router':
+      fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
+      resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+      fs.writeFileSync(generator.resultFilePath, resultString);
+      console.log("✅ Generated router: " + generator.resultFilePath);
+      break;
+    case 'js':
+      fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
+      resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+      fs.writeFileSync(generator.resultFilePath, resultString);
+      console.log("✅ Generated js: " + generator.resultFilePath);
+      break;
+    case 'vue':
+      fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
+      resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+      fs.writeFileSync(generator.resultFilePath, resultString);
+      console.log("✅ Generated vue: " + generator.resultFilePath);
       break;
     default:
       console.log('NOT FOUND!');
