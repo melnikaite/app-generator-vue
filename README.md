@@ -1,6 +1,8 @@
 # App Generator Vue Truffle Box
 
-This box can help to generate Vue app with CRUD functionality that keeps data in blockchain.
+This box can help to scaffold a new contract development.
+It generates a ledger(register) contract with customizable fields, unit tests and 
+ready-to-use front end Vue app with CRUD functionality.
 
 ## Installation
 
@@ -17,6 +19,8 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
 3. Generate entity
     ```
     node agv.js --model Team --fields '[{"team":"string"},{"lead":"string"},{"size":"string"},{"description":"string"},{"github":"string"}]'
+    on Windows please use \"
+    node agv.js --model Team --fields '[{\"team\":\"string\"},{\"lead\":\"string\"},{\"size\":\"string\"},{\"description\":\"string\"},{\"github\":\"string\"}]'
     ```
 
 4. Run the development console.
