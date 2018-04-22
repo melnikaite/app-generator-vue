@@ -16,30 +16,28 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
 
 3. Generate entity
     ```
-
+    node agv.js --model Event --fields '[{"name":"string"},{"location":"bytes32"}]'
     ```
 
-3. Run the development console.
+4. Run the development console.
     ```
     truffle develop
     ```
 
-4. Compile and migrate the smart contracts.
+5. Compile and migrate the smart contracts.
     ```
     migrate
     ```
 
-5. Run the development server (outside the development console) for front-end hot reloading. Smart contract changes must be manually recompiled and migrated.
+6. Run the development server (outside the development console) for front-end hot reloading. Smart contract changes must be manually recompiled and migrated.
     ```
-    // Serves the front-end on http://localhost:8080
     npm run dev
     ```
-## 🚀 Generate Scaffold
 
-```
-node agv.js --model Event --fields '[{"name":"string"},{"location":"bytes32"}]'
-```
-
+7. Open entity page
+    ```
+    http://localhost:8080/?#/events
+    ```
 
 ## 💸 ETH Addresses for Donation
 
