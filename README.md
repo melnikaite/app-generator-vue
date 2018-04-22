@@ -5,6 +5,11 @@ It generates a ledger(register) contract with customizable fields, unit tests an
 ready-to-use front end Vue app with CRUD functionality.
 
 ## Demo 
+
+![Demo](https://www.dropbox.com/s/8t2ytlpwf78j88f/cli.gif?dl=0&raw=1 "Logo Title Text 1")
+
+UI files are also gerenated, take a look:
+
 ![Demo](https://www.dropbox.com/s/heg0fpvvcqxboon/out.gif?dl=0&raw=1 "Logo Title Text 1")
 
 
