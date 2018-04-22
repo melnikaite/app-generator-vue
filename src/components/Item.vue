@@ -27,18 +27,20 @@
       </li>
     </ul>
 
-    <div>
-      <label>
-        Id <input v-model="createForm.id">
-      </label>
-      <label>
-        Name <input v-model="createForm.name">
-      </label>
-      <label>
-        Location <input v-model="createForm.location">
-      </label>
-      <button @click="createItem">Create</button>
-    </div>
+    <b-form @submit="createItem" @reset="cancelCreating">
+      <b-form-group horizontal id="idGroup" label="ID" label-for="id">
+        <b-form-input id="id" v-model="createForm.id" required></b-form-input>
+      </b-form-group>
+      <b-form-group horizontal breakpoint="md" id="nameGroup" label="Name" label-for="name">
+        <b-form-input id="name" v-model="createForm.name" required></b-form-input>
+      </b-form-group>
+      <b-form-group horizontal breakpoint="md" id="locationGroup" label="Location" label-for="location">
+        <b-form-input id="location" v-model="createForm.location" required></b-form-input>
+      </b-form-group>
+
+      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button type="reset" variant="danger">Reset</b-button>
+    </b-form>
   </section>
 </template>
 
@@ -92,18 +94,15 @@
           console.log(err)
         })
       },
-      createItem: function () {
-        if (typeof this.createForm.id !== 'undefined' && this.createForm.id !== '' &&
-          typeof this.createForm.name !== 'undefined' && this.createForm.name !== '' &&
-          typeof this.createForm.location !== 'undefined' && this.createForm.location !== ''
-        ) {
-          Item.createItem(this.createForm.id, this.createForm.name, this.createForm.location).then(tx => {
-            console.log(tx);
-            this._reload();
-          }).catch(err => {
-            console.log(err)
-          })
-        }
+      createItem: function (evt) {
+        evt.preventDefault();
+        Item.createItem(this.createForm.id, this.createForm.name, this.createForm.location).then(tx => {
+          console.log(tx);
+          this._reload();
+          this.createForm = Object.assign({}, this.initialForm);
+        }).catch(err => {
+          console.log(err)
+        })
       },
 
       editItem: function (id) {
@@ -115,6 +114,10 @@
 
       cancel: function (id) {
         this.editing = undefined;
+      },
+
+      cancelCreating: function (id) {
+        this.createForm = Object.assign({}, this.initialForm);
       },
 
       updateItem: function () {
