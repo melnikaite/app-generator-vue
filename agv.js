@@ -12,7 +12,7 @@ const targetEntityFields = argv.fields;
 const generators = [
   {
     name: 'contract',
-    templatePath: 'contracts/TemplateContract.sol.tmpl',
+    templatePath: 'templates/contract_template.sol',
     resultFilePath: 'contracts/' + targetEntityName + 'Contract.sol'
   },
   {
@@ -22,8 +22,13 @@ const generators = [
   },
   {
     name: 'test',
-    templatePath: 'test/test_template.js',
+    templatePath: 'templates/test_template.js',
     resultFilePath: 'test/' + targetEntityName.toLowerCase() + '.js'
+  },
+  {
+    name: 'migration',
+    templatePath: 'templates/2_deploy_contracts_template.js',
+    resultFilePath: 'migrations/' + '2_deploy_contracts.js'
   }
 ];
 let fileInitialString;
@@ -42,6 +47,12 @@ generators.forEach(generator => {
      fs.writeFileSync(generator.resultFilePath, resultString);
      console.log("✅ Generated test: " + generator.resultFilePath);
      break;
+    case 'migration':
+     fileInitialString = fs.readFileSync(generator.templatePath, 'utf8');
+     resultString = generatorContract.createContract(fileInitialString, targetEntityName, targetEntityFields);
+    fs.writeFileSync(generator.resultFilePath, resultString);
+    console.log("✅ Generated migration: " + generator.resultFilePath);
+    break;
     case 'itemJs':
       console.log('🙏 Help wanted! ' + generator.resultFilePath + ' needs to be generated... ');
       break;
