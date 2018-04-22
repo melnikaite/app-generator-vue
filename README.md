@@ -8,7 +8,7 @@ ready-to-use front end Vue app with CRUD functionality.
 
 ## Demo 
 
-![Demo](https://www.dropbox.com/s/8t2ytlpwf78j88f/cli.gif?dl=0&raw=1 "Logo Title Text 1")
+![Demo](https://www.dropbox.com/s/bn73zt91t26uyyh/cli.gif?dl=0&raw=1 "Logo Title Text 1")
 
 UI files are also gerenated, take a look:
 
