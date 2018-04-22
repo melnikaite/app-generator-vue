@@ -122,7 +122,7 @@ _valueResultCommaSeparated_
     return new Promise((resolve, reject) => {
       self.instance.deleteEntityname(
         id,
-        {from: self.$web3.eth.accounts[0], gas: 100000}
+        {from: self.$web3.eth.accounts[0], gas: 200000}
       ).then((result) => {
         return self.$web3.eth.getTransactionReceiptMined(result.tx);
       }).then(tx => {
