@@ -13,24 +13,23 @@ contract('EntitynameContract', function(accounts) {
     var changedField = " changed field ";
     var entity;
     var account;
-    var result;
     entitynameContract = await EntitynameContract.deployed();
 
 //CREATE TESTS
 
     entity = entity01;  
     account = accounts[0];
-    result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" , entity + field +"3" ,entity + field +"4" ,entity + field +"5",  {from:account});
+    var result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" ,  {from:account});
     assert.isOk(result,  entity + " should be created successfully");
     
     entity = entity02;
     account = accounts[0];    
-    result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" , entity + field +"3" ,entity + field +"4" ,entity + field +"5",  {from:account});
+    var result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" ,  {from:account});
     assert.isOk(result,  entity + " should be created successfully");
 
     entity = entity11;
     account = accounts[1];    
-    result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" , entity + field +"3" ,entity + field +"4" ,entity + field +"5",  {from:account});
+    var result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" ,  {from:account});
     assert.isOk(result,  entity + " should be created successfully");
 
     //check EntitynameCreated event
@@ -43,7 +42,7 @@ contract('EntitynameContract', function(accounts) {
     account = accounts[1];  
     revertFound = false;
     try {
-      result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" , entity + field +"3" ,entity + field +"4" ,entity + field +"5",  {from:account});
+      var result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" ,  {from:account});
     } catch (error) {
       revertFound = error.message.search("revert") >= 0;
     } 
@@ -64,10 +63,6 @@ contract('EntitynameContract', function(accounts) {
     assert.equal (results[0], account, entity + " should be from account " + account);
     assert.equal (results[2], entity + field + "1", " should be " + entity + field + "1");
     assert.equal (results[3], entity + field + "2", " should be " + entity + field + "2");
-    assert.equal (results[4], entity + field + "3", " should be " + entity + field + "3");
-    assert.equal (results[5], entity + field + "4", " should be " + entity + field + "4");
-    assert.equal (results[6], entity + field + "5", " should be " + entity + field + "5");
-
  
   //UPDATE TESTS  
   
@@ -77,8 +72,8 @@ contract('EntitynameContract', function(accounts) {
     account = accounts[1];    //wrong account
     revertFound = false;
   try {
-    result = await entitynameContract.updateEntityname (entity, entity + field +"1", entity + field +"2" , entity + field +"3" ,entity + field +"4" ,entity + field +"5",  {from:account});
-  } catch (error) {
+      var result = await entitynameContract.updateEntityname (entity, entity + changedField + "1",  entity + changedField + "2" , {from:account});
+    } catch (error) {
       revertFound = error.message.search("revert") >= 0;
     } 
     assert(revertFound, "update from the wrong account should fail");
@@ -91,15 +86,13 @@ contract('EntitynameContract', function(accounts) {
     //valid update
     entity = entity01;
     account = accounts[0]; 
-    field = changedField;
-    result = await entitynameContract.updateEntityname (entity, entity + field +"1", entity + field +"2" , entity + field +"3" ,entity + field +"4" ,entity + field +"5",  {from:account});
+    var result = await entitynameContract.updateEntityname (entity, entity + changedField + "1",  entity + changedField + "2" , {from:account});
     assert.isOk(result," should be updated now");
     results = await entitynameContract.readEntityname.call(entity);
+    field = changedField;
     assert.equal (results[2], entity + field + "1", " should be " + entity + field + "1");
     assert.equal (results[3], entity + field + "2", " should be " + entity + field + "2");
-    assert.equal (results[4], entity + field + "3", " should be " + entity + field + "3");
-    assert.equal (results[5], entity + field + "4", " should be " + entity + field + "4");
-    assert.equal (results[6], entity + field + "5", " should be " + entity + field + "5");
+
     //check EntitynameUpdated event
     assert.equal('EntitynameUpdated',result.logs[0].event);
     // console.log("event =", result.logs[0].event);

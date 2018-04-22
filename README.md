@@ -1,6 +1,12 @@
 # App Generator Vue Truffle Box
 
-This box can help to generate Vue app with CRUD functionality that keeps data in blockchain.
+This box can help to scaffold a new contract development.
+It generates a ledger(register) contract with customizable fields, unit tests and 
+ready-to-use front end Vue app with CRUD functionality.
+
+## Demo 
+![Demo](https://www.dropbox.com/s/heg0fpvvcqxboon/out.gif?dl=0&raw=1 "Logo Title Text 1")
+
 
 ## Installation
 
@@ -16,7 +22,9 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
 
 3. Generate entity
     ```
-    node agv.js --model Team --fields '[{"title":"string"},{"founder":"string"}]'
+    node agv.js --model Team --fields '[{"team":"string"},{"lead":"string"},{"size":"string"},{"description":"string"},{"github":"string"}]'
+    on Windows please use \"
+    node agv.js --model Team --fields '[{\"team\":\"string\"},{\"lead\":\"string\"},{\"size\":\"string\"},{\"description\":\"string\"},{\"github\":\"string\"}]'
     ```
 
 4. Run the development console.
@@ -41,13 +49,23 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
 
 8. Open entity page
     ```
-    http://localhost:8080/?#/teams
+    http://localhost:8080/#/teams
     ```
+
+### Demo
+
+https://app-generator-vue.s3.eu-central-1.amazonaws.com/index.html#/teams
+
+### Deploy
+
+`npm run build`
+
+#### S3
+
+`aws s3 sync dist s3://app-generator-vue --acl public-read`
 
 ## 💸 ETH Addresses for Donation
 
 0x63CE9f57E2e4B41d3451DEc20dDB89143fD755bB
-
 0x424988F9443eaE0AD0a23DffBD096E9F21598384
-
 0xA68D58B5a556eDf1eBE09eDA55DdE034b8b4Df61
