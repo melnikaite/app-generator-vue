@@ -51,7 +51,5 @@ ready-to-use front end Vue app with CRUD functionality.
 ## 💸 ETH Addresses for Donation
 
 0x63CE9f57E2e4B41d3451DEc20dDB89143fD755bB
-
 0x424988F9443eaE0AD0a23DffBD096E9F21598384
-
 0xA68D58B5a556eDf1eBE09eDA55DdE034b8b4Df61
