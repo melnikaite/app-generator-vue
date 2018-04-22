@@ -16,7 +16,7 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
 
 3. Generate entity
     ```
-    node agv.js --model Event --fields '[{"name":"string"},{"location":"bytes32"}]'
+    node agv.js --model Team --fields '[{"title":"string"},{"founder":"string"}]'
     ```
 
 4. Run the development console.
@@ -36,7 +36,7 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
 
 7. Open entity page
     ```
-    http://localhost:8080/?#/events
+    http://localhost:8080/?#/teams
     ```
 
 ## 💸 ETH Addresses for Donation

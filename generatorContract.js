@@ -11,8 +11,8 @@ module.exports.createContract = function(fileInitialString, targetEntity, target
   const thisUpdateFormCommaSeparated = this.thisUpdateFormCommaSeparated(fields);
   const valueUndefinedCommaSeparated = this.valueUndefinedCommaSeparated(fields);
   const thisUpdateFormNewLineSeparated = this.thisUpdateFormNewLineSeparated(fields);
-  const itemMapIdValueCommaSeparated = this.itemMapIdValueCommaSeparated(fields);
-  const itemMapIdValueEqualValueSemicolonSeparated = this.itemMapIdValueEqualValueSemicolonSeparated(fields);
+  const entitynameMapIdValueCommaSeparated = this.entitynameMapIdValueCommaSeparated(fields);
+  const entitynameMapIdValueEqualValueSemicolonSeparated = this.entitynameMapIdValueEqualValueSemicolonSeparated(fields);
   const valueResultCommaSeparated = this.valueResultCommaSeparated(fields);
   const typeCommaSeparated = this.typeCommaSeparated(fields);
   const tableFieldTemplate = this.tableFieldTemplate(fields);
@@ -27,14 +27,14 @@ module.exports.createContract = function(fileInitialString, targetEntity, target
                 .replace(/_thisUpdateFormCommaSeparated_/g, thisUpdateFormCommaSeparated)
                 .replace(/_valueUndefinedCommaSeparated_/g, valueUndefinedCommaSeparated)
                 .replace(/_thisUpdateFormNewLineSeparated_/g, thisUpdateFormNewLineSeparated)
-                .replace(/_itemMapIdValueCommaSeparated_/g, itemMapIdValueCommaSeparated)
-                .replace(/_itemMapIdValueEqualValueSemicolonSeparated_/g, itemMapIdValueEqualValueSemicolonSeparated)
+                .replace(/_entitynameMapIdValueCommaSeparated_/g, entitynameMapIdValueCommaSeparated)
+                .replace(/_entitynameMapIdValueEqualValueSemicolonSeparated_/g, entitynameMapIdValueEqualValueSemicolonSeparated)
                 .replace(/_valueResultCommaSeparated_/g, valueResultCommaSeparated)
                 .replace(/_typeCommaSeparated_/g, typeCommaSeparated)
                 .replace(/_tableFieldTemplate_/g, tableFieldTemplate)
                 .replace(/_createFormGroup_/g, createFormGroup)
-                .replace(/Item/g, targetEntity)
-                .replace(/item/g, targetEntity.toLowerCase());
+                .replace(/Entityname/g, targetEntity)
+                .replace(/entityname/g, targetEntity.toLowerCase());
 
   return result;
 }
@@ -142,42 +142,42 @@ module.exports.valueUndefinedCommaSeparated = function(fields) {
 }
 
 /*
-        this.updateForm.name = this.itemMap[id].name;
-        this.updateForm.location = this.itemMap[id].location;
+        this.updateForm.name = this.entitynameMap[id].name;
+        this.updateForm.location = this.entitynameMap[id].location;
  */
 module.exports.thisUpdateFormNewLineSeparated = function(fields) {
   let result = '';
   fields.forEach((property) => {
     const propertyType = property[Object.keys(property)[0]];
     const propertyName = Object.keys(property)[0];
-    result += `        this.updateForm.${propertyName} = this.itemMap[id].${propertyName};\n`;
+    result += `        this.updateForm.${propertyName} = this.entitynameMap[id].${propertyName};\n`;
   });
   return result;
 }
 
-// itemMap[id].name, itemMap[id].location
-module.exports.itemMapIdValueCommaSeparated = function(fields) {
+// entitynameMap[id].name, entitynameMap[id].location
+module.exports.entitynameMapIdValueCommaSeparated = function(fields) {
   let result = '';
   fields.forEach((property) => {
     const propertyType = property[Object.keys(property)[0]];
     const propertyName = Object.keys(property)[0];
-    result += ` itemMap[id].${propertyName},`;
+    result += ` entitynameMap[id].${propertyName},`;
   });
   result = result.trim();
   var commaIndex = result.lastIndexOf(',');
   result = result.substring(0,commaIndex);
   // console.log ("result func 4 =", result);
   return result;
-  // console.log("itemMapIdValueCommaSeparated ", (result === "itemMap[id].name, itemMap[id].location"));
+  // console.log("entitynameMapIdValueCommaSeparated ", (result === "entitynameMap[id].name, entitynameMap[id].location"));
 }
 
-// itemMap[id].name = name; itemMap[id].location = location;
-module.exports.itemMapIdValueEqualValueSemicolonSeparated = function(fields) {
+// entitynameMap[id].name = name; entitynameMap[id].location = location;
+module.exports.entitynameMapIdValueEqualValueSemicolonSeparated = function(fields) {
   let result = '';
   fields.forEach((property) => {
     const propertyType = property[Object.keys(property)[0]];
     const propertyName = Object.keys(property)[0];
-    result += ` itemMap[id].${propertyName}=${propertyName};\n`;
+    result += ` entitynameMap[id].${propertyName}=${propertyName};\n`;
   });
   result = result.trim();
   // var commaIndex = result.lastIndexOf(',');
@@ -185,9 +185,9 @@ module.exports.itemMapIdValueEqualValueSemicolonSeparated = function(fields) {
   // console.log ("result func 5 =", result);
   return result;
   //should be:
-  //  itemMap[id].name = name;
-  //  itemMap[id].location = location;
-  // console.log("itemMapIdValueEqualValueSemicolonSeparated ", (result === "itemMap[id].name = name; itemMap[id].location = location; "));
+  //  entitynameMap[id].name = name;
+  //  entitynameMap[id].location = location;
+  // console.log("entitynameMapIdValueEqualValueSemicolonSeparated ", (result === "entitynameMap[id].name = name; entitynameMap[id].location = location; "));
 }
 
 // name: result[4], location: result[5],
@@ -224,7 +224,7 @@ module.exports.typeCommaSeparated = function(fields) {
           <b-form-input v-model="updateForm.name" required :ref="'item-name-' + data.item"></b-form-input>
         </div>
         <div v-show="editing !== data.item">
-          {{itemMap[data.item].name}}
+          {{entitynameMap[data.item].name}}
         </div>
       </template>
  */
@@ -239,7 +239,7 @@ module.exports.tableFieldTemplate = function(fields) {
           <b-form-input v-model="updateForm.${propertyName}" required :ref="'item-${propertyName}-' + data.item"></b-form-input>
         </div>
         <div v-show="editing !== data.item">
-          {{itemMap[data.item].${propertyName}}}
+          {{entitynameMap[data.item].${propertyName}}}
         </div>
       </template>
     `;

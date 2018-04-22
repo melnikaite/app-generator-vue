@@ -1,31 +1,31 @@
 <template>
-  <section id='item'>
-    <h1>Items Registry</h1>
+  <section id='entityname'>
+    <h1>Entitynames Registry</h1>
 
-    <b-table striped hover :items="itemArray" :fields="fields" v-show="countItem > 0">
+    <b-table striped hover :items="entitynameArray" :fields="fields" v-show="countEntityname > 0">
       <template slot="id" slot-scope="data">
-        {{itemMap[data.item].id}}
+        {{entitynameMap[data.item].id}}
       </template>
 
 _tableFieldTemplate_
 
       <template slot="actions" slot-scope="data">
         <span v-show="editing === data.item">
-          <b-button @click="updateItem(data.item)">Update</b-button>
+          <b-button @click="updateEntityname(data.item)">Update</b-button>
           <b-button @click="cancelEditing()">Cancel</b-button>
         </span>
         <span v-show="editing !== data.item">
-          <b-button @click="editItem(data.item)">Edit</b-button>
+          <b-button @click="editEntityname(data.item)">Edit</b-button>
         </span>
-        <b-button @click="deleteItem(data.item)">Delete</b-button>
+        <b-button @click="deleteEntityname(data.item)">Delete</b-button>
       </template>
     </b-table>
 
-    <p v-show="countItem < 1">No Items</p>
+    <p v-show="countEntityname < 1">No Entitynames</p>
 
-    <h3 class="mt-5">Create new Item</h3>
+    <h3 class="mt-5">Create new Entityname</h3>
 
-    <b-form @submit="createItem" @reset="cancelCreating">
+    <b-form @submit="createEntityname" @reset="cancelCreating">
       <b-form-group horizontal id="idGroup" label="ID" label-for="id">
         <b-form-input id="id" v-model="createForm.id" required></b-form-input>
       </b-form-group>
@@ -38,16 +38,16 @@ _createFormGroup_
 </template>
 
 <script>
-  import Item from '@/js/item'
+  import Entityname from '@/js/entityname'
 
   export default {
-    name: 'items',
+    name: 'entitynames',
     data() {
       return {
         fields: ['id', _valueQuotedCommaSeparated_, 'actions'],
-        itemArray: [],
-        itemMap: {},
-        countItem: 0,
+        entitynameArray: [],
+        entitynameMap: {},
+        countEntityname: 0,
         initialForm: {
           id: undefined,
 _valueUndefinedCommaSeparated_
@@ -58,7 +58,7 @@ _valueUndefinedCommaSeparated_
       }
     },
     beforeCreate: function () {
-      Item.init(this.$web3).then(() => {
+      Entityname.init(this.$web3).then(() => {
         this._reload();
         this.createForm = Object.assign({}, this.initialForm);
         this.updateForm = Object.assign({}, this.initialForm);
@@ -66,18 +66,18 @@ _valueUndefinedCommaSeparated_
     },
     methods: {
       _reload: function () {
-        Item.countItem().then(result => {
+        Entityname.countEntityname().then(result => {
           console.log(result);
-          this.countItem = result;
-          this.itemArray = [];
+          this.countEntityname = result;
+          this.entitynameArray = [];
 
-          for (let i = 0; i < this.countItem; i++) {
-            Item.itemArray(i).then(id => {
+          for (let i = 0; i < this.countEntityname; i++) {
+            Entityname.entitynameArray(i).then(id => {
               console.log(id);
-              Item.itemMap(id).then(result => {
+              Entityname.entitynameMap(id).then(result => {
                 console.log(result);
-                this.itemMap[id] = result;
-                this.itemArray.push(id);
+                this.entitynameMap[id] = result;
+                this.entitynameArray.push(id);
               });
             }).catch(err => {
               console.log(err)
@@ -87,9 +87,9 @@ _valueUndefinedCommaSeparated_
           console.log(err)
         })
       },
-      createItem: function (evt) {
+      createEntityname: function (evt) {
         evt.preventDefault();
-        Item.createItem(this.createForm.id, _thisCreateFormCommaSeparated_).then(tx => {
+        Entityname.createEntityname(this.createForm.id, _thisCreateFormCommaSeparated_).then(tx => {
           console.log(tx);
           this._reload();
           this.createForm = Object.assign({}, this.initialForm);
@@ -98,8 +98,8 @@ _valueUndefinedCommaSeparated_
         })
       },
 
-      editItem: function (id) {
-        this.updateForm.id = this.itemMap[id].id;
+      editEntityname: function (id) {
+        this.updateForm.id = this.entitynameMap[id].id;
 _thisUpdateFormNewLineSeparated_
         this.editing = id;
       },
@@ -112,12 +112,12 @@ _thisUpdateFormNewLineSeparated_
         this.createForm = Object.assign({}, this.initialForm);
       },
 
-      updateItem: function (id) {
+      updateEntityname: function (id) {
         [_valueQuotedCommaSeparated_].forEach((field) => this.$refs['item-' + field + '-' + id].$el.reportValidity());
         if (![_valueQuotedCommaSeparated_].map(
           (field) => this.$refs['item-' + field + '-' + id].$el.checkValidity()
         ).includes(false)) {
-          Item.updateItem(this.updateForm.id, _thisUpdateFormCommaSeparated_).then(tx => {
+          Entityname.updateEntityname(this.updateForm.id, _thisUpdateFormCommaSeparated_).then(tx => {
             console.log(tx);
             this._reload();
             this.updateForm = Object.assign({}, this.initialForm);
@@ -128,9 +128,9 @@ _thisUpdateFormNewLineSeparated_
         }
       },
 
-      deleteItem: function (id) {
+      deleteEntityname: function (id) {
         if (confirm('Are you sure?')) {
-          Item.deleteItem(id).then(tx => {
+          Entityname.deleteEntityname(id).then(tx => {
             console.log(tx);
             this._reload();
           }).catch(err => {

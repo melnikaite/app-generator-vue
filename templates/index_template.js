@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Item from '@/components/Item'
+import Entityname from '@/components/Entityname'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/items',
-      name: 'items',
-      component: Item
+      path: '/entitynames',
+      name: 'entitynames',
+      component: Entityname
     }
   ]
 })
