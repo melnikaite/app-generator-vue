@@ -19,7 +19,7 @@ contract('EntitynameContract', function(accounts) {
 
     entity = entity01;  
     account = accounts[0];
-    var result = await entitynameContract.createEntityname (entity, entity + field +"1", entity + field +"2" ,  {from:account});
+    var result = await entitynameContract.createEntityname (entity, propertyNames ,  {from:account});
     assert.isOk(result,  entity + " should be created successfully");
     
     entity = entity02;

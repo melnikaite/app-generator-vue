@@ -6,8 +6,8 @@ module.exports.createContract = function(fileInitialString, targetEntity, target
 
 
   let result = fileInitialString
-                .replace(/Item/g, targetEntity)
-                .replace(/item/g, targetEntity.toLowerCase());
+                .replace(/Entityname/g, targetEntity)
+                .replace(/entityname/g, targetEntity.toLowerCase());
 
   return result;
 }

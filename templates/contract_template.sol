@@ -1,11 +1,11 @@
 pragma solidity ^0.4.4;
 
 
-contract ItemContract {
+contract EntitynameContract {
 
   address   contractOwner;
 //sssss
-  struct Item {
+  struct Entityname {
     //internal fields
     uint      index;
     address   owner;
@@ -17,104 +17,104 @@ contract ItemContract {
 
   }
 
-  mapping(bytes32 => Item) public itemMap;
-  bytes32[] public itemArray;
+  mapping(bytes32 => Entityname) public entitynameMap;
+  bytes32[] public entitynameArray;
 
-  function ItemContract() public {
+  function EntitynameContract() public {
     contractOwner = msg.sender;
   }
 
-  // Creates Item
-  function createItem(bytes32 id,
+  // Creates Entityname
+  function createEntityname(bytes32 id,
         //generated fields
         _typeValueCommaSeparated_)
         public returns (bool) {
 
-    //item already exists
-     require (itemMap[id].owner == address(0));
+    //entityname already exists
+     require (entitynameMap[id].owner == address(0));
 
-    //create new item
+    //create new entityname
     //internal fields
-    itemMap[id].index = itemArray.length;
-    itemArray.push(id);
-    itemMap[id].owner = msg.sender;
-    itemMap[id].lastUpdated = now;
+    entitynameMap[id].index = entitynameArray.length;
+    entitynameArray.push(id);
+    entitynameMap[id].owner = msg.sender;
+    entitynameMap[id].lastUpdated = now;
     //generated fields
-    _itemMapIdValueEqualValueSemicolonSeparated_
-    ItemCreated(id,
+    _entitynameMapIdValueEqualValueSemicolonSeparated_
+    EntitynameCreated(id,
         //generated fields - only param 1???
         _valueCommaSeparated_);
     return true;
   }
 
-  // Returns an Item by id
-  function  readItem(bytes32 id) constant public returns (address,uint,
+  // Returns an Entityname by id
+  function  readEntityname(bytes32 id) constant public returns (address,uint,
       //generated fields
       _typeCommaSeparated_) {
-    return (itemMap[id].owner, itemMap[id].lastUpdated,
+    return (entitynameMap[id].owner, entitynameMap[id].lastUpdated,
       //generated fields
-            _itemMapIdValueCommaSeparated_);
+            _entitynameMapIdValueCommaSeparated_);
   }
 
-  // Returns an Item by index
-  function  readItemByIndex(uint index) constant public returns (address,uint,
+  // Returns an Entityname by index
+  function  readEntitynameByIndex(uint index) constant public returns (address,uint,
       //generated fields
         _typeCommaSeparated_) {
-    require(index < itemArray.length);
-    bytes32 id = itemArray[index];
-    return (itemMap[id].owner, itemMap[id].lastUpdated,
+    require(index < entitynameArray.length);
+    bytes32 id = entitynameArray[index];
+    return (entitynameMap[id].owner, entitynameMap[id].lastUpdated,
       //generated fields
-            _itemMapIdValueCommaSeparated_);
+            _entitynameMapIdValueCommaSeparated_);
   }
- // Updates Item
-  function updateItem(bytes32 id,
+ // Updates Entityname
+  function updateEntityname(bytes32 id,
         //generated fields
         _typeValueCommaSeparated_)
         public  returns (bool) {
-    //item should exist
-    require (itemMap[id].owner != address(0));
-    require (itemMap[id].owner == msg.sender || contractOwner == msg.sender); //only item owner or contract owner can update
+    //entityname should exist
+    require (entitynameMap[id].owner != address(0));
+    require (entitynameMap[id].owner == msg.sender || contractOwner == msg.sender); //only entityname owner or contract owner can update
 
-    itemMap[id].lastUpdated = now;
+    entitynameMap[id].lastUpdated = now;
     //generated fields
-    _itemMapIdValueEqualValueSemicolonSeparated_
-    ItemUpdated(id,
+    _entitynameMapIdValueEqualValueSemicolonSeparated_
+    EntitynameUpdated(id,
         //generated fields - only param 1???
         _valueCommaSeparated_);
     return true;
   }
 
-  // Deletes Item
-  function deleteItem  (bytes32 id) public  returns (bool) {
-    //item should  exist
-    require (itemMap[id].owner != address(0));
-    require (itemMap[id].owner == msg.sender || contractOwner == msg.sender); //only item owner or contract owner can update
+  // Deletes Entityname
+  function deleteEntityname  (bytes32 id) public  returns (bool) {
+    //entityname should  exist
+    require (entitynameMap[id].owner != address(0));
+    require (entitynameMap[id].owner == msg.sender || contractOwner == msg.sender); //only entityname owner or contract owner can update
 
-    var i = itemMap[id].index;
-    var lastItem = itemArray[itemArray.length-1];
-    itemMap[lastItem].index = i;
-    itemArray[i] = lastItem;
-    itemArray.length--;
+    var i = entitynameMap[id].index;
+    var lastEntityname = entitynameArray[entitynameArray.length-1];
+    entitynameMap[lastEntityname].index = i;
+    entitynameArray[i] = lastEntityname;
+    entitynameArray.length--;
 
 
-    ItemDeleted(id,
+    EntitynameDeleted(id,
         //generated fields - only param 1???
-        _itemMapIdValueCommaSeparated_ );
-    delete(itemMap[id]);
+        _entitynameMapIdValueCommaSeparated_ );
+    delete(entitynameMap[id]);
     return true;
   }
 
-  // Returns itemCount
-  function  countItem() constant public returns (uint) {
-    return itemArray.length;
+  // Returns entitynameCount
+  function  countEntityname() constant public returns (uint) {
+    return entitynameArray.length;
   }
 
 
-  event ItemCreated(bytes32 indexed _id,
+  event EntitynameCreated(bytes32 indexed _id,
         _typeValueCommaSeparated_);
-  event ItemUpdated(bytes32 indexed _id,
+  event EntitynameUpdated(bytes32 indexed _id,
         _typeValueCommaSeparated_);
-  event ItemDeleted(bytes32 indexed _id,
+  event EntitynameDeleted(bytes32 indexed _id,
         _typeValueCommaSeparated_);
 
 }
