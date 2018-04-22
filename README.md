@@ -16,7 +16,7 @@ This box can help to generate Vue app with CRUD functionality that keeps data in
 
 3. Generate entity
     ```
-    node agv.js --model Team --fields '[{"title":"string"},{"founder":"string"}]'
+    node agv.js --model Team --fields '[{"team":"string"},{"lead":"string"},{"size":"string"},{"description":"string"},{"github":"string"}]'
     ```
 
 4. Run the development console.
