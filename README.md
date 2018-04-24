@@ -34,12 +34,10 @@ UI files are also gerenated, take a look:
     node agv.js --model Team --fields '[{\"team\":\"string\"},{\"lead\":\"string\"},{\"size\":\"string\"},{\"description\":\"string\"},{\"github\":\"string\"}]'
     ```
 
-4. Run the development console.
-    ```
-    truffle develop
-    ```
+4. start Ganache on port 7545.
 
-5. Compile and migrate the smart contracts.
+
+5. Run truffle migrate to compile and deploy contract to the  development environment.
     ```
     migrate
     ```
